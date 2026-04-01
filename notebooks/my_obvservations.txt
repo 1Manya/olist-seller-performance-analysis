@@ -1,0 +1,171 @@
+------------------------------------------
+PROJECT: Vendor (Seller) Performance Analysis
+DATASET: Olist Brazilian E-Commerce
+
+====================
+TABLE 1: olist_sellers_dataset.csv
+Shape: 3,095 rows | 4 columns
+Columns:
+  - seller_id            : Unique ID for each seller/vendor (PRIMARY KEY)
+  - seller_zip_code_prefix : Zip code of seller location
+  - seller_city          : City where seller is located
+  - seller_state         : State where seller is located
+
+==================
+TABLE 2: olist_order_items_dataset.csv
+Shape: 1,12,650 rows | 7 columns
+Columns:
+  - order_id             : Which order (links to orders table)
+  - order_item_id        : Item number within an order
+  - product_id           : Which product was sold (links to products table)
+  - seller_id            : Which vendor sold it (links to sellers table)
+  - shipping_limit_date  : Last date to ship the item
+  - price                : Selling price of the product
+  - freight_value        : Delivery/shipping cost
+
+
+=====================
+TABLE 3: olist_orders_dataset.csv
+Shape: 99,441 rows | 8 columns
+Columns:
+  - order_id                    : Unique order ID (PRIMARY KEY)
+  - customer_id                 : Which customer placed order
+  - order_status                : delivered / cancelled / shipped etc.
+  - order_purchase_timestamp    : Date & time order was placed
+  - order_approved_at           : When payment was approved
+  - order_delivered_carrier_date: When handed to delivery carrier
+  - order_delivered_customer_date: When customer received it
+  - order_estimated_delivery_date: Expected delivery date
+
+====================
+TABLE 4: olist_products_dataset.csv
+Shape: 32,951 rows | 9 columns
+Columns:
+  - product_id               : Unique product ID (PRIMARY KEY)
+  - product_category_name    : Category in Portuguese
+  - product_name_lenght      : Length of product name (characters)
+  - product_description_lenght: Length of description
+  - product_photos_qty       : Number of product photos
+  - product_weight_g         : Weight in grams
+  - product_length_cm        : Length in cm
+  - product_height_cm        : Height in cm
+  - product_width_cm         : Width in cm
+
+=================
+TABLE 5: olist_order_payments_dataset.csv
+Shape: 1,03,886 rows | 5 columns
+Columns:
+  - order_id              : Links to orders table
+  - payment_sequential    : Payment number (1 order can have multiple payments)
+  - payment_type          : credit_card / boleto / voucher / debit_card
+  - payment_installments  : Number of EMI installments chosen
+  - payment_value         : Actual amount paid
+
+
+=================
+TABLE 6: olist_order_reviews_dataset.csv
+Shape: 99,224 rows | 7 columns
+Columns:
+  - review_id                 : Unique review ID
+  - order_id                  : Which order was reviewed
+  - review_score              : Rating given (1 to 5 stars)
+  - review_comment_title      : Short title of review (mostly NaN)
+  - review_comment_message    : Full review text (mostly NaN)
+  - review_creation_date      : When review was written
+  - review_answer_timestamp   : When seller responded
+
+
+========================
+TABLE 7: olist_customers_dataset.csv
+Shape: 99,441 rows | 5 columns
+Columns:
+  - customer_id           : Unique ID per order (not per person)
+  - customer_unique_id    : Actual unique customer ID
+  - customer_zip_code_prefix : Customer zip code
+  - customer_city         : Customer city
+  - customer_state        : Customer state
+
+
+==================
+TABLE 8: olist_geolocation_dataset.csv
+Shape: 10,00,163 rows | 5 columns
+Columns:
+  - geolocation_zip_code_prefix : Zip code
+  - geolocation_lat             : Latitude
+  - geolocation_lng             : Longitude
+  - geolocation_city            : City name
+  - geolocation_state           : State name
+
+
+=================
+TABLE 9: product_category_name_translation.csv
+Shape: 71 rows | 2 columns
+Columns:
+  - product_category_name         : Category name in Portuguese
+  - product_category_name_english : Category name in English
+
+====================
+TABLE RELATIONSHIPS (Joins)
+
+olist_order_items    --> olist_orders      (via order_id)
+olist_order_items    --> olist_sellers     (via seller_id)
+olist_order_items    --> olist_products    (via product_id)
+olist_orders         --> olist_customers   (via customer_id)
+olist_orders         --> olist_order_payments (via order_id)
+olist_orders         --> olist_order_reviews  (via order_id)
+olist_products       --> product_category_name_translation
+                         (via product_category_name)
+
+===================================
+FINAL AGGREGATED TABLE - Columns I Will Need
+
+
+From sellers table:
+  - seller_id, seller_city, seller_state
+
+From order_items table:
+  - price (as total_revenue)
+  - freight_value (as total_freight_cost)
+  - COUNT of orders (as total_orders)
+
+From products + translation table:
+  - product_category_name_english (as category)
+
+From orders table:
+  - order_status (filter: only 'delivered')
+  - order_purchase_timestamp (for time series)
+  - delivery delay = actual_delivery - estimated_delivery
+
+From reviews table:
+  - avg review_score per seller (as avg_rating)
+
+New columns I will create:
+  - gross_profit = total_revenue - total_freight_cost
+  - profit_margin = (gross_profit / total_revenue) * 100
+  - avg_order_value = total_revenue / total_orders
+  - delivery_delay_days = delivered_date - estimated_date
+  - is_late_delivery = 1 if delay > 0, else 0
+
+=====================
+BUSINESS PROBLEM 
+
+
+Olist is a Brazilian e-commerce platform where thousands of 
+small sellers list their products. The company needs to:
+
+1. Identify top performing sellers by revenue and profit
+2. Find which product categories are most profitable
+3. Understand impact of freight cost on seller performance
+4. Identify sellers with poor ratings and late deliveries
+5. Find seasonal trends in sales throughout the year
+6. Recommend strategies to improve seller performance
+
+
+
+ observation from correlation heatmap ->seller performance heatmap 
+ relationship                      Value        Business Meaning
+ Revenue → Gross Profit            0.99         if Revenue increase profit will increase 
+ Orders → Freight Cost             0.92         Bulk sellers need to manage freight
+ Avg Order Value → Revenue/Order   0.96         Premium sellers most valuable
+ Rating → Late Delivery           -0.39         Late delivery = low rating
+ Rating → Gross Profit            -0.02         Rating and profit unrelated

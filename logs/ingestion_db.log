@@ -1,0 +1,35 @@
+2026-03-26 21:39:50,106 - INFO - Database engine created at: ../data/olist_ecommerce.db
+2026-03-26 21:39:50,107 - INFO - ==================================================
+2026-03-26 21:39:50,107 - INFO - Starting data ingestion process...
+2026-03-26 21:39:50,107 - INFO - ==================================================
+2026-03-26 21:39:50,108 - INFO - Reading file: olist_customers_dataset.csv
+2026-03-26 21:39:50,383 - INFO - Inserting olist_customers_dataset.csv into database...
+2026-03-26 21:39:51,724 - INFO - Successfully inserted: olist_customers_dataset --> 99,441 rows
+2026-03-26 21:39:51,724 - INFO - Reading file: olist_geolocation_dataset.csv
+2026-03-26 21:39:53,882 - INFO - Inserting olist_geolocation_dataset.csv into database...
+2026-03-26 21:40:17,388 - INFO - Successfully inserted: olist_geolocation_dataset --> 1,000,163 rows
+2026-03-26 21:40:17,395 - INFO - Reading file: olist_orders_dataset.csv
+2026-03-26 21:40:18,794 - INFO - Inserting olist_orders_dataset.csv into database...
+2026-03-26 21:40:22,075 - INFO - Successfully inserted: olist_orders_dataset --> 99,441 rows
+2026-03-26 21:40:22,077 - INFO - Reading file: olist_order_items_dataset.csv
+2026-03-26 21:40:22,736 - INFO - Inserting olist_order_items_dataset.csv into database...
+2026-03-26 21:40:25,284 - INFO - Successfully inserted: olist_order_items_dataset --> 112,650 rows
+2026-03-26 21:40:25,285 - INFO - Reading file: olist_order_payments_dataset.csv
+2026-03-26 21:40:25,627 - INFO - Inserting olist_order_payments_dataset.csv into database...
+2026-03-26 21:40:27,710 - INFO - Successfully inserted: olist_order_payments_dataset --> 103,886 rows
+2026-03-26 21:40:27,711 - INFO - Reading file: olist_order_reviews_dataset.csv
+2026-03-26 21:40:28,907 - INFO - Inserting olist_order_reviews_dataset.csv into database...
+2026-03-26 21:40:31,024 - INFO - Successfully inserted: olist_order_reviews_dataset --> 99,224 rows
+2026-03-26 21:40:31,024 - INFO - Reading file: olist_products_dataset.csv
+2026-03-26 21:40:31,238 - INFO - Inserting olist_products_dataset.csv into database...
+2026-03-26 21:40:32,111 - INFO - Successfully inserted: olist_products_dataset --> 32,951 rows
+2026-03-26 21:40:32,111 - INFO - Reading file: olist_sellers_dataset.csv
+2026-03-26 21:40:32,161 - INFO - Inserting olist_sellers_dataset.csv into database...
+2026-03-26 21:40:32,253 - INFO - Successfully inserted: olist_sellers_dataset --> 3,095 rows
+2026-03-26 21:40:32,254 - INFO - Reading file: product_category_name_translation.csv
+2026-03-26 21:40:32,260 - INFO - Inserting product_category_name_translation.csv into database...
+2026-03-26 21:40:32,308 - INFO - Successfully inserted: product_category_name_translation --> 71 rows
+2026-03-26 21:40:32,308 - INFO - ==================================================
+2026-03-26 21:40:32,308 - INFO - Ingestion complete! Total files loaded: 9
+2026-03-26 21:40:32,308 - INFO - Total time taken: 0.7 minutes
+2026-03-26 21:40:32,308 - INFO - ==================================================
