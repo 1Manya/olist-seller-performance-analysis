@@ -120,12 +120,12 @@ olist-seller-performance-analysis/
 ---
 
 ## 📊 Dashboard Preview
-
+![Dashboard file ]()
 ### Page 1 — Seller Performance
 ![Dashboard Page 1](dashboard/seller_performance_analysis.jpeg)
 
 ### Page 2 — Geographic Analysis
-![Dashboard Page 2](reports/dashboard_screenshot2.png)
+![Dashboard Page 2](dashboard/geographic_analysis.jpeg)
 
 ---
 
@@ -146,7 +146,7 @@ Low Sellers  profit margin CI → surprisingly higher margins
 H0: No difference in profit margins between groups
 H1: Significant difference exists
 
-Result: p-value < 0.05 → H0 REJECTED ✅
+Result: p-value < 0.05 → H0 REJECTED 
 Conclusion: Top and low performers are statistically
             different — not just by chance
 ```
@@ -218,9 +218,6 @@ Power BI Desktop → Open → dashboard/olist_seller_performance.pbix
 ---
 
 ## 🙋 About This Project
-
-This project was built as part of my Data Analytics portfolio
-during my 3rd year of BTech CSE (Data Science).
 
 The goal was to go beyond basic Kaggle notebooks and build
 something that reflects how data analytics actually works
