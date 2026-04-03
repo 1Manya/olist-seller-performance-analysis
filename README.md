@@ -120,7 +120,7 @@ olist-seller-performance-analysis/
 ---
 
 ## 📊 Dashboard Preview
-![Dashboard file ]()
+![Dashboard file ](dashboard/Olist_seller_performance.pbix)
 ### Page 1 — Seller Performance
 ![Dashboard Page 1](dashboard/seller_performance_analysis.jpeg)
 
