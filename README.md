@@ -134,22 +134,20 @@ olist-seller-performance-analysis/
 This project goes beyond basic charts —
 actual statistics were used to validate findings:
 
-**Confidence Intervals (95%)**
-```
-Top Sellers  profit margin CI → statistically higher
-Low Sellers  profit margin CI → surprisingly higher margins
-             (due to premium pricing strategy)
-```
+**Confidence Intervals (95%) — Profit Margin**
+Top 25% of sellers by revenue : 82.3%  (CI: 81.5% to 83.2%)
+Remaining 75% of sellers      : 70.7%  (CI: 69.7% to 71.8%)
+→ Intervals do not overlap: top earners keep a higher share
+  of revenue after freight.
 
 **Hypothesis Testing (Independent T-Test)**
-```
-H0: No difference in profit margins between groups
-H1: Significant difference exists
+H0: No difference in profit margin between the two groups
+H1: A significant difference exists
 
-Result: p-value < 0.05 → H0 REJECTED 
-Conclusion: Top and low performers are statistically
-            different — not just by chance
-```
+Result: t = 12.45, p < 0.05 → H0 rejected
+Conclusion: Top-revenue sellers have a statistically higher
+profit margin than the rest.
+Note: profit margin = (revenue − freight) / revenue, a freight-adjusted proxy.
 
 ---
 
